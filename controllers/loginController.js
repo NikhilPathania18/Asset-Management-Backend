@@ -2,7 +2,7 @@ import admin from "../models/admin.js"
 import jwt from 'jsonwebtoken'
 import { comparePassword } from "../helpers/encrypt.js"
 export const loginController =async(req,res) => {
-    
+
     const { email,password } = req.body
     console.log(email,password);
     const user = await admin.findOne({email})
@@ -13,7 +13,8 @@ export const loginController =async(req,res) => {
         })
     }
     else{
-        if(comparePassword(password,user.password))
+        const doesMatch = await comparePassword(password,user.password)
+        if(doesMatch)
         {
             let User = {
                 _id: user._id,
