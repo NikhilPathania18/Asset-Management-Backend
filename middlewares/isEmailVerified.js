@@ -1,16 +1,22 @@
-import superAdmin from "../models/superAdmin.js";
+import admin from "../models/admin.js";
 
 const isEmailVerified = async(req,res,next) => {
     try {
         const {email,password} = req.body
-        const user = await superAdmin.findOne({email})
+        const user = await admin.findOne({email})
         if(user){
             if(!user.isEmailVerified)
-            return res.status(200).send({
+            {return res.status(200).send({
                 success: false,
                 message: 'You need to verify your email first'
+            })}
+            next();
+        }
+        else{
+            return res.status(200).send({
+                success: false,
+                message: 'User not found'
             })
-            else next();
         }
     } catch (error) {
         console.log(error.message);

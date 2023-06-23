@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const superAdminSchema = new Schema({
+const adminSchema = new Schema({
     email: {
         type: String,
         required: true
@@ -12,9 +12,13 @@ const superAdminSchema = new Schema({
     isEmailVerified: {
         type: String,
         default: false
+    },
+    role: {
+        type: Number,
+        default: 0
     }
 })
 
-const superAdmin = mongoose.model('SuperAdmin', superAdminSchema)
+const admin = mongoose.model('SuperAdmin', adminSchema)
 
-export default superAdmin;
+export default admin;
