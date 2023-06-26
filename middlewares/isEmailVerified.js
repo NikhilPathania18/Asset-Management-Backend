@@ -5,11 +5,14 @@ const isEmailVerified = async(req,res,next) => {
         const {email,password} = req.body
         const user = await admin.findOne({email})
         if(user){
-            if(!user.isEmailVerified)
-            {return res.status(200).send({
+            if(user.isEmailVerified==false)
+            {
+                return res.status(200).send({
                 success: false,
                 message: 'You need to verify your email first'
-            })}
+            })
+            }
+            else
             next();
         }
         else{

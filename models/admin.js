@@ -10,7 +10,7 @@ const adminSchema = new Schema({
         required: true
     },
     isEmailVerified: {
-        type: String,
+        type: Boolean,
         default: false
     },
     role: {
